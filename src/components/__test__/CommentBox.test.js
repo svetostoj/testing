@@ -12,9 +12,30 @@ afterEach(()=> {
 });
 
 it ('has a text area and submit button', ()=> {
-    
-
     expect(wrapped.find('textarea').length).toEqual(1);
     expect(wrapped.find('button').length).toEqual(1);
 });
 
+describe('the text area', ()=>{
+beforeEach(()=>{
+    wrapped.find('textarea').simulate('change', {
+        target: { value: 'new comment'}
+    });
+    wrapped.update();
+});
+
+it ('has a textarea that the users can type in', ()=> {
+
+    expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+
+});
+
+it ('when form is submited, the textarea gets cleared', ()=>{
+
+    expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+    wrapped.find('form').simulate('submit');
+    wrapped.update();
+    expect(wrapped.find('textarea').prop('value')).toEqual('');
+});
+
+});
