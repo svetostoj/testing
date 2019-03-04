@@ -9,5 +9,5 @@ export default props  => {
         <Provider store={createStore(reducers, {})}>
             {props.children}
         </Provider>
-    )
-};
+    );
+};  
